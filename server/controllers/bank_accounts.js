@@ -6,25 +6,26 @@ module.exports.create = (req, res) => {
   .then(bankAccount => {
     res.status(201).send(bankAccount);
   })
-  .error(error => {
-    res.status(500).send(err);
+  .catch(error => {
+    res.status(500).send(error);
   });
 };
 
 module.exports.delete = (req, res) => {
-  models.BankAccount.where(req.body)
+  models.BankAccount.where(req.params)
   .fetch()
   .then(bankAccount => {
     if (!bankAccount) {
       throw bankAccount;
     }
+
     return bankAccount.destroy()
   })
   .then(() => {
     res.sendStatus(200);
   })
   .error(error => {
-    res.status(503).send(err);
+    res.status(503).send(error);
   })
   .catch(() => {
     res.sendStatus(404);
@@ -32,16 +33,17 @@ module.exports.delete = (req, res) => {
 };
 
 module.exports.update = (req, res) => {
-  models.BankAccount.where(req.body)
+  models.BankAccount.where(req.params)
   .fetch()
   .then(bankAccount => {
     if (!bankAccount) {
       throw bankAccount;
     }
-    return profile.save(req.body, { method: 'update' });
+
+    return bankAccount.save(req.body, { method: 'update' });
   })
-  .then(() => {
-    res.sendStatus(201);
+  .then(bankAccount => {
+    res.status(201).send(bankAccount);
   })
   .error(error => {
     res.status(500).send(error);
@@ -52,7 +54,7 @@ module.exports.update = (req, res) => {
 };
 
 module.exports.get = (req, res) => {
-  models.BankAccount.where(req.body)
+  models.BankAccount.where(req.params)
   .fetchAll()
   .then(bankAccounts => {
     res.status(200).send(bankAccounts);
