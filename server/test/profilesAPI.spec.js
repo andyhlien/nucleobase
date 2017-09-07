@@ -108,17 +108,17 @@ describe('Profiles API', function () {
       .end(done);
   });
 
-  // it('accepts DELETE requests to /api/profiles/:id', function (done) {
-  //   request(app)
-  //     .delete('/api/profiles/1')
-  //     .expect(200)
-  //     .end(done);
-  // });
+  it('accepts DELETE requests to /api/profiles/:id', function (done) {
+    request(app)
+      .delete('/api/profiles/1')
+      .expect(200)
+      .end(done);
+  });
 
-  // it('sends 404 if id on DELETE requests to /api/profiles/:id does not exist', function (done) {
-  //   request(app)
-  //     .delete('/api/profiles/123')
-  //     .expect(404)
-  //     .end(done);
-  // });
+  it('sends 404 if id on DELETE requests to /api/profiles/:id does not exist', function (done) {
+    request(app)
+      .delete('/api/profiles/123')
+      .expect(404)
+      .end(done);
+  });
 });
