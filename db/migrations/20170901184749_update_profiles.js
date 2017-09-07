@@ -1,5 +1,6 @@
 exports.up = function(knex, Promise) {
   return knex.schema.table('profiles', function(table) {
+    table.string('type', 255).nullable();
     table.integer('rating').nullable();
     table.integer('rating_count').nullable();
     table.string('cookie', 100).nullable();
@@ -14,6 +15,7 @@ exports.up = function(knex, Promise) {
 
 exports.down = function(knex, Promise) {
   return knex.schema.table('profiles', function(table) {
+    table.dropColumn('type');
     table.dropColumn('rating');
     table.dropColumn('rating_count');
     table.dropColumn('cookie');
