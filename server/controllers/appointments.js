@@ -6,25 +6,26 @@ module.exports.create = (req, res) => {
   .then(appointment => {
     res.status(201).send(appointment);
   })
-  .error(error => {
-    res.status(500).send(err);
+  .catch(error => {
+    res.status(500).send(error);
   });
 };
 
 module.exports.delete = (req, res) => {
-  models.Appointment.where(req.body)
+  models.Appointment.where(req.params)
   .fetch()
   .then(appointment => {
     if (!appointment) {
       throw appointment;
     }
+
     return appointment.destroy()
   })
   .then(() => {
     res.sendStatus(200);
   })
   .error(error => {
-    res.status(503).send(err);
+    res.status(503).send(error);
   })
   .catch(() => {
     res.sendStatus(404);
@@ -32,16 +33,17 @@ module.exports.delete = (req, res) => {
 };
 
 module.exports.update = (req, res) => {
-  models.Appointment.where(req.body)
+  models.Appointment.where(req.params)
   .fetch()
   .then(appointment => {
     if (!appointment) {
       throw appointment;
     }
-    return profile.save(req.body, { method: 'update' });
+
+    return appointment.save(req.body, { method: 'update' });
   })
-  .then(() => {
-    res.sendStatus(201);
+  .then(appointment => {
+    res.status(201).send(appointment);
   })
   .error(error => {
     res.status(500).send(error);
@@ -52,7 +54,7 @@ module.exports.update = (req, res) => {
 };
 
 module.exports.get = (req, res) => {
-  models.Appointment.where(req.body)
+  models.Appointment.where(req.params)
   .fetchAll()
   .then(appointments => {
     res.status(200).send(appointments);
