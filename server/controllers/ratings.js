@@ -6,25 +6,26 @@ module.exports.create = (req, res) => {
   .then(rating => {
     res.status(201).send(rating);
   })
-  .error(error => {
-    res.status(500).send(err);
+  .catch(error => {
+    res.status(500).send(error);
   });
 };
 
 module.exports.delete = (req, res) => {
-  models.Rating.where(req.body)
+  models.Rating.where(req.params)
   .fetch()
   .then(rating => {
     if (!rating) {
       throw rating;
     }
+
     return rating.destroy()
   })
   .then(() => {
     res.sendStatus(200);
   })
   .error(error => {
-    res.status(503).send(err);
+    res.status(503).send(error);
   })
   .catch(() => {
     res.sendStatus(404);
@@ -32,16 +33,17 @@ module.exports.delete = (req, res) => {
 };
 
 module.exports.update = (req, res) => {
-  models.Rating.where(req.body)
+  models.Rating.where(req.params)
   .fetch()
   .then(rating => {
     if (!rating) {
       throw rating;
     }
-    return profile.save(req.body, { method: 'update' });
+
+    return rating.save(req.body, { method: 'update' });
   })
-  .then(() => {
-    res.sendStatus(201);
+  .then(rating => {
+    res.status(201).send(rating);
   })
   .error(error => {
     res.status(500).send(error);
@@ -52,7 +54,7 @@ module.exports.update = (req, res) => {
 };
 
 module.exports.get = (req, res) => {
-  models.Rating.where(req.body)
+  models.Rating.where(req.params)
   .fetchAll()
   .then(ratings => {
     res.status(200).send(ratings);
