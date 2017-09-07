@@ -1,2 +1,11 @@
+module.exports.Appointment = require('./appointments');
 module.exports.Auth = require('./auths');
+module.exports.BankAccount = require('./bank_accounts');
+module.exports.Message = require('./messages');
+module.exports.Payment = require('./payments');
 module.exports.Profile = require('./profiles');
+module.exports.Rating = require('./ratings');
+module.exports.Review = require('./reviews');
+module.exports.Service = require('./services');
+module.exports.ServiceJoin = require('./services_join');
+module.exports.UserTrainerJoin = require('./user_trainer_join');
