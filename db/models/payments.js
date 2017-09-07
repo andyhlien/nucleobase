@@ -1,7 +1,7 @@
 const db = require('../');
 
 const Payment = db.Model.extend({
-  tablename: 'payments',
+  tableName: 'payments',
   profile: function() {
     return this.belongsTo('Profile');
   }
