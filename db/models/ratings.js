@@ -1,7 +1,7 @@
 const db = require('../');
 
 const Rating = db.Model.extend({
-  tablename: 'ratings',
+  tableName: 'ratings',
   profile: function() {
     return this.belongsTo('Profile');
   }

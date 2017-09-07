@@ -1,7 +1,7 @@
 const db = require('../');
 
 const UserTrainerJoin = db.Model.extend({
-  tablename: 'user_trainer_join',
+  tableName: 'user_trainer_join',
   profiles: function() {
     return this.belongsTo('Profile');
   }

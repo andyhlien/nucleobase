@@ -1,7 +1,7 @@
 const db = require('../');
 
 const Message = db.Model.extend({
-  tablename: 'messages',
+  tableName: 'messages',
   profile: function() {
     return this.belongsTo('Profile');
   }

@@ -1,7 +1,7 @@
 const db = require('../');
 
 const ServiceJoin = db.Model.extend({
-  tablename: 'services_join',
+  tableName: 'services_join',
   profiles: function() {
     return this.belongsTo('Profile'); 
   },
