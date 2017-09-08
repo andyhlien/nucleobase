@@ -1,4 +1,4 @@
-const BankAccount = require('../../server/controllers/bank_accounts.js');
+const BankAccounts = require('../../server/controllers/bank_accounts.js');
 const dbUtils = require('../../db/lib/utils.js');
 const httpMocks = require('node-mocks-http');
 const expect = require('chai').expect;
@@ -32,7 +32,7 @@ describe('BankAccount model tests', () => {
       routing_number: 1,
     };
 
-    BankAccount.create(req, res);
+    BankAccounts.create(req, res);
   });
 
   it('should be able to update a bank account', (done) => {
@@ -58,7 +58,7 @@ describe('BankAccount model tests', () => {
       routing_number: 2,
     };
 
-    BankAccount.update(req, res);
+    BankAccounts.update(req, res);
   });
 
   it('should be able to get bank accounts', (done) => {
@@ -78,7 +78,7 @@ describe('BankAccount model tests', () => {
       id: 1
     };
 
-    BankAccount.get(req, res);
+    BankAccounts.get(req, res);
   });
 
   it('should be able to delete a bank account', (done) => {
@@ -96,6 +96,6 @@ describe('BankAccount model tests', () => {
       id: 1
     };
 
-    BankAccount.delete(req, res);
+    BankAccounts.delete(req, res);
   });
 });
