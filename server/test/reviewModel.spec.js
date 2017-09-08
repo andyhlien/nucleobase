@@ -43,8 +43,7 @@ describe('Review model tests', () => {
       expect(data).to.be.an('object');
       expect(data.attributes).to.be.an('object');
       expect(data.attributes.id).to.equal(req.params.id);
-      expect(data.attributes.time).to.equal(req.body.time);
-      expect(data.attributes.location).to.equal(req.body.location);
+      expect(data.attributes.review).to.equal(req.body.review);
 
       done();
     };
