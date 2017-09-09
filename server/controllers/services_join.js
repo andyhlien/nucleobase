@@ -12,7 +12,7 @@ module.exports.create = (req, res) => {
 };
 
 module.exports.delete = (req, res) => {
-  models.ServiceJoin.where(req.params)
+  models.ServiceJoin.where(req.body)
   .fetch()
   .then(serviceJoin => {
     if (!serviceJoin) {
@@ -33,7 +33,7 @@ module.exports.delete = (req, res) => {
 };
 
 module.exports.update = (req, res) => {
-  models.ServiceJoin.where(req.params)
+  models.ServiceJoin.where({ id: req.body.id })
   .fetch()
   .then(serviceJoin => {
     if (!serviceJoin) {
@@ -54,7 +54,7 @@ module.exports.update = (req, res) => {
 };
 
 module.exports.get = (req, res) => {
-  models.ServiceJoin.where(req.params)
+  models.ServiceJoin.where(req.body)
   .fetchAll()
   .then(servicesJoin => {
     res.status(200).send(servicesJoin);

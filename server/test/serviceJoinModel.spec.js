@@ -28,8 +28,8 @@ describe('ServicesJoin model tests', () => {
     };
 
     req.body = {
-      service: 'Yoga',
-      description: 'Tom',
+      service: 'Weight Lifting',
+      description: 'Gains',
     };
 
     Services.create(req, res);
@@ -50,8 +50,8 @@ describe('ServicesJoin model tests', () => {
     };
 
     req.body = {
-      service: 'Swimming',
-      description: 'Gui',
+      service: 'Fencing',
+      description: 'Very sharp',
     };
 
     Services.create(req, res);
@@ -86,18 +86,15 @@ describe('ServicesJoin model tests', () => {
     res.send = (data) => {
       expect(data).to.be.an('object');
       expect(data.attributes).to.be.an('object');
-      expect(data.attributes.id).to.equal(req.params.id);
+      expect(data.attributes.id).to.equal(req.body.id);
       expect(data.attributes.user_id).to.equal(req.body.user_id);
       expect(data.attributes.service_id).to.equal(req.body.service_id);
 
       done();
     };
 
-    req.params = {
-      id: 1
-    };
-
     req.body = {
+      id: 1,
       user_id: 1,
       service_id: 2,
     };
@@ -118,7 +115,7 @@ describe('ServicesJoin model tests', () => {
       done();
     };
 
-    req.params = {
+    req.body = {
       id: 1
     };
 
@@ -136,7 +133,7 @@ describe('ServicesJoin model tests', () => {
       done();
     };
 
-    req.params = {
+    req.body = {
       id: 1
     };
 
