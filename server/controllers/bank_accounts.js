@@ -12,7 +12,7 @@ module.exports.create = (req, res) => {
 };
 
 module.exports.delete = (req, res) => {
-  models.BankAccount.where(req.params)
+  models.BankAccount.where(req.body)
   .fetch()
   .then(bankAccount => {
     if (!bankAccount) {
@@ -33,7 +33,7 @@ module.exports.delete = (req, res) => {
 };
 
 module.exports.update = (req, res) => {
-  models.BankAccount.where(req.params)
+  models.BankAccount.where({ id: req.body.id })
   .fetch()
   .then(bankAccount => {
     if (!bankAccount) {
@@ -54,7 +54,7 @@ module.exports.update = (req, res) => {
 };
 
 module.exports.get = (req, res) => {
-  models.BankAccount.where(req.params)
+  models.BankAccount.where(req.body)
   .fetchAll()
   .then(bankAccounts => {
     res.status(200).send(bankAccounts);
