@@ -29,7 +29,7 @@ describe('Message model tests', () => {
     req.body = {
       sender: 1,
       receiver: 1,
-      message: 'Chao says hi',
+      message: 'Chao: I hate Andy',
     };
 
     Messages.create(req, res);
@@ -42,18 +42,15 @@ describe('Message model tests', () => {
     res.send = (data) => {
       expect(data).to.be.an('object');
       expect(data.attributes).to.be.an('object');
-      expect(data.attributes.id).to.equal(req.params.id);
+      expect(data.attributes.id).to.equal(req.body.id);
       expect(data.attributes.message).to.equal(req.body.message);
 
       done();
     };
 
-    req.params = {
-      id: 1
-    };
-
     req.body = {
-      message: 'Tom says hi'
+      id: 1,
+      message: 'Chao: I hate Andy. Just kidding'
     };
 
     Messages.update(req, res);
@@ -72,7 +69,7 @@ describe('Message model tests', () => {
       done();
     };
 
-    req.params = {
+    req.body = {
       id: 1
     };
 
@@ -90,7 +87,7 @@ describe('Message model tests', () => {
       done();
     };
 
-    req.params = {
+    req.body = {
       id: 1
     };
 

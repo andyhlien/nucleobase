@@ -12,7 +12,7 @@ module.exports.create = (req, res) => {
 };
 
 module.exports.delete = (req, res) => {
-  models.Message.where(req.params)
+  models.Message.where(req.body)
   .fetch()
   .then(message => {
     if (!message) {
@@ -33,7 +33,7 @@ module.exports.delete = (req, res) => {
 };
 
 module.exports.update = (req, res) => {
-  models.Message.where(req.params)
+  models.Message.where({ id: req.body.id })
   .fetch()
   .then(message => {
     if (!message) {
@@ -54,7 +54,7 @@ module.exports.update = (req, res) => {
 };
 
 module.exports.get = (req, res) => {
-  models.Message.where(req.params)
+  models.Message.where(req.body)
   .fetchAll()
   .then(messages => {
     res.status(200).send(messages);
