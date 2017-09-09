@@ -12,7 +12,7 @@ module.exports.create = (req, res) => {
 };
 
 module.exports.delete = (req, res) => {
-  models.UserTrainerJoin.where(req.params)
+  models.UserTrainerJoin.where(req.body)
   .fetch()
   .then(userTrainerJoin => {
     if (!userTrainerJoin) {
@@ -33,7 +33,7 @@ module.exports.delete = (req, res) => {
 };
 
 module.exports.update = (req, res) => {
-  models.UserTrainerJoin.where(req.params)
+  models.UserTrainerJoin.where({ id: req.body.id })
   .fetch()
   .then(userTrainerJoin => {
     if (!userTrainerJoin) {
@@ -54,7 +54,7 @@ module.exports.update = (req, res) => {
 };
 
 module.exports.get = (req, res) => {
-  models.UserTrainerJoin.where(req.params)
+  models.UserTrainerJoin.where(req.body)
   .fetchAll()
   .then(userTrainerJoin => {
     res.status(200).send(userTrainerJoin);
