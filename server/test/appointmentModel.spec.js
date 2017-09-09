@@ -31,7 +31,7 @@ describe('Appointment model tests', () => {
       receiver: 1,
       time: '18:00',
       date: 'October 10, 2017',
-      price: 10,
+      price: 100,
       location: 'San Francisco',
     };
 
@@ -45,18 +45,15 @@ describe('Appointment model tests', () => {
     res.send = (data) => {
       expect(data).to.be.an('object');
       expect(data.attributes).to.be.an('object');
-      expect(data.attributes.id).to.equal(req.params.id);
+      expect(data.attributes.id).to.equal(req.body.id);
       expect(data.attributes.time).to.equal(req.body.time);
       expect(data.attributes.location).to.equal(req.body.location);
 
       done();
     };
 
-    req.params = {
-      id: 1
-    };
-
     req.body = {
+      id: 1,
       time: '06:00',
       location: 'Paris',
     };
@@ -77,7 +74,7 @@ describe('Appointment model tests', () => {
       done();
     };
 
-    req.params = {
+    req.body = {
       id: 1
     };
 
@@ -95,7 +92,7 @@ describe('Appointment model tests', () => {
       done();
     };
 
-    req.params = {
+    req.body = {
       id: 1
     };
 
