@@ -33,6 +33,10 @@ app.get('/verify', middleware.auth.logged, (req, res) => {
   res.status(200).send({message: true, user_id: req.user.id});
 });
 
+app.get('/session', middleware.auth.verify, (req, res) => {
+  res.send(req.user);
+} );
+
 app.post('/appointments', middleware.auth.verify, control.Appointments.create);
 app.delete('/appointments', middleware.auth.verify, control.Appointments.delete);
 app.put('/appointments', middleware.auth.verify, control.Appointments.update);
