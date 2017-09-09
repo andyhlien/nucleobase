@@ -12,7 +12,7 @@ module.exports.create = (req, res) => {
 };
 
 module.exports.delete = (req, res) => {
-  models.Payment.where(req.params)
+  models.Payment.where(req.body)
   .fetch()
   .then(payment => {
     if (!payment) {
@@ -33,7 +33,7 @@ module.exports.delete = (req, res) => {
 };
 
 module.exports.update = (req, res) => {
-  models.Payment.where(req.params)
+  models.Payment.where({ id: req.body.id })
   .fetch()
   .then(payment => {
     if (!payment) {
@@ -54,7 +54,7 @@ module.exports.update = (req, res) => {
 };
 
 module.exports.get = (req, res) => {
-  models.Payment.where(req.params)
+  models.Payment.where(req.body)
   .fetchAll()
   .then(payments => {
     res.status(200).send(payments);

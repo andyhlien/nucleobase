@@ -45,18 +45,15 @@ describe('Payment model tests', () => {
     res.send = (data) => {
       expect(data).to.be.an('object');
       expect(data.attributes).to.be.an('object');
-      expect(data.attributes.id).to.equal(req.params.id);
+      expect(data.attributes.id).to.equal(req.body.id);
       expect(data.attributes.card_number).to.equal(req.body.card_number);
       expect(data.attributes.crv).to.equal(req.body.crv);
 
       done();
     };
 
-    req.params = {
-      id: 1
-    };
-
     req.body = {
+      id: 1,
       card_number: 2,
       crv: 2
     };
@@ -77,7 +74,7 @@ describe('Payment model tests', () => {
       done();
     };
 
-    req.params = {
+    req.body = {
       id: 1
     };
 
@@ -95,7 +92,7 @@ describe('Payment model tests', () => {
       done();
     };
 
-    req.params = {
+    req.body = {
       id: 1
     };
 
