@@ -42,17 +42,14 @@ describe('UserTrainerJoin model tests', () => {
     res.send = (data) => {
       expect(data).to.be.an('object');
       expect(data.attributes).to.be.an('object');
-      expect(data.attributes.id).to.equal(req.params.id);
+      expect(data.attributes.id).to.equal(req.body.id);
       expect(data.attributes.view).to.equal(req.body.view);
 
       done();
     };
 
-    req.params = {
-      id: 1
-    };
-
     req.body = {
+      id: 1,
       view: true
     };
 
@@ -72,7 +69,7 @@ describe('UserTrainerJoin model tests', () => {
       done();
     };
 
-    req.params = {
+    req.body = {
       id: 1
     };
 
@@ -90,7 +87,7 @@ describe('UserTrainerJoin model tests', () => {
       done();
     };
 
-    req.params = {
+    req.body = {
       id: 1
     };
 
