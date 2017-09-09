@@ -28,7 +28,7 @@ describe('Service model tests', () => {
 
     req.body = {
       service: 'Yoga',
-      description: 'Tom',
+      description: 'Extreme',
     };
 
     Services.create(req, res);
@@ -41,18 +41,15 @@ describe('Service model tests', () => {
     res.send = (data) => {
       expect(data).to.be.an('object');
       expect(data.attributes).to.be.an('object');
-      expect(data.attributes.id).to.equal(req.params.id);
+      expect(data.attributes.id).to.equal(req.body.id);
       expect(data.attributes.service).to.equal(req.body.service);
       expect(data.attributes.description).to.equal(req.body.description);
 
       done();
     };
 
-    req.params = {
-      id: 1
-    };
-
     req.body = {
+      id: 1,
       service: 'Fencing',
       description: 'Chao',
     };
@@ -73,7 +70,7 @@ describe('Service model tests', () => {
       done();
     };
 
-    req.params = {
+    req.body = {
       id: 1
     };
 
@@ -91,7 +88,7 @@ describe('Service model tests', () => {
       done();
     };
 
-    req.params = {
+    req.body = {
       id: 1
     };
 
