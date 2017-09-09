@@ -12,7 +12,7 @@ module.exports.create = (req, res) => {
 };
 
 module.exports.delete = (req, res) => {
-  models.Appointment.where(req.params)
+  models.Appointment.where(req.body)
   .fetch()
   .then(appointment => {
     if (!appointment) {
@@ -33,7 +33,7 @@ module.exports.delete = (req, res) => {
 };
 
 module.exports.update = (req, res) => {
-  models.Appointment.where(req.params)
+  models.Appointment.where({ id: req.body.id })
   .fetch()
   .then(appointment => {
     if (!appointment) {
@@ -54,7 +54,7 @@ module.exports.update = (req, res) => {
 };
 
 module.exports.get = (req, res) => {
-  models.Appointment.where(req.params)
+  models.Appointment.where(req.body)
   .fetchAll()
   .then(appointments => {
     res.status(200).send(appointments);
