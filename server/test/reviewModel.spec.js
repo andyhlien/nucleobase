@@ -29,7 +29,7 @@ describe('Review model tests', () => {
     req.body = {
       user_id: 1,
       trainer_id: 1,
-      review: 'Gui is a good person'
+      review: 'Gui is a shady guy'
     };
 
     Reviews.create(req, res);
@@ -42,18 +42,15 @@ describe('Review model tests', () => {
     res.send = (data) => {
       expect(data).to.be.an('object');
       expect(data.attributes).to.be.an('object');
-      expect(data.attributes.id).to.equal(req.params.id);
+      expect(data.attributes.id).to.equal(req.body.id);
       expect(data.attributes.review).to.equal(req.body.review);
 
       done();
     };
 
-    req.params = {
-      id: 1
-    };
-
     req.body = {
-      review: 'Gui is a questionable person'
+      id: 1,
+      review: 'Gui is a VERY shady guy'
     };
 
     Reviews.update(req, res);
@@ -72,7 +69,7 @@ describe('Review model tests', () => {
       done();
     };
 
-    req.params = {
+    req.body = {
       id: 1
     };
 
@@ -90,7 +87,7 @@ describe('Review model tests', () => {
       done();
     };
 
-    req.params = {
+    req.body = {
       id: 1
     };
 

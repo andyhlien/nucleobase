@@ -12,7 +12,7 @@ module.exports.create = (req, res) => {
 };
 
 module.exports.delete = (req, res) => {
-  models.Review.where(req.params)
+  models.Review.where(req.body)
   .fetch()
   .then(review => {
     if (!review) {
@@ -33,7 +33,7 @@ module.exports.delete = (req, res) => {
 };
 
 module.exports.update = (req, res) => {
-  models.Review.where(req.params)
+  models.Review.where({ id: req.body.id })
   .fetch()
   .then(review => {
     if (!review) {
@@ -54,7 +54,7 @@ module.exports.update = (req, res) => {
 };
 
 module.exports.get = (req, res) => {
-  models.Review.where(req.params)
+  models.Review.where(req.body)
   .fetchAll()
   .then(reviews => {
     res.status(200).send(reviews);
