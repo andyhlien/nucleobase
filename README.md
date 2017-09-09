@@ -102,7 +102,7 @@ Note: `--env NODE_ENV` may be omitted for development. For example, `knex migrat
 
 To run webpack build: `yarn run build`
 
-To run server: `yarn run start`
+To run server: `yarn run server-dev`
 
 To run tests: `yarn run test`
 
