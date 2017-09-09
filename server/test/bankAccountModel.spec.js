@@ -42,18 +42,15 @@ describe('BankAccount model tests', () => {
     res.send = (data) => {
       expect(data).to.be.an('object');
       expect(data.attributes).to.be.an('object');
-      expect(data.attributes.id).to.equal(req.params.id);
+      expect(data.attributes.id).to.equal(req.body.id);
       expect(data.attributes.account_number).to.equal(req.body.account_number);
       expect(data.attributes.routing_number).to.equal(req.body.routing_number);
 
       done();
     };
 
-    req.params = {
-      id: 1
-    };
-
     req.body = {
+      id: 1,
       account_number: 2,
       routing_number: 2,
     };
@@ -74,7 +71,7 @@ describe('BankAccount model tests', () => {
       done();
     };
 
-    req.params = {
+    req.body = {
       id: 1
     };
 
@@ -92,7 +89,7 @@ describe('BankAccount model tests', () => {
       done();
     };
 
-    req.params = {
+    req.body = {
       id: 1
     };
 
