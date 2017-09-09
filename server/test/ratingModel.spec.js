@@ -29,8 +29,8 @@ describe('Rating model tests', () => {
     req.body = {
       user_id: 1,
       trainer_id: 1,
-      user_rating: 1,
-      trainer_rating: 1,
+      user_rating: 5,
+      trainer_rating: 5,
     };
 
     Ratings.create(req, res);
@@ -43,18 +43,15 @@ describe('Rating model tests', () => {
     res.send = (data) => {
       expect(data).to.be.an('object');
       expect(data.attributes).to.be.an('object');
-      expect(data.attributes.id).to.equal(req.params.id);
+      expect(data.attributes.id).to.equal(req.body.id);
       expect(data.attributes.user_rating).to.equal(req.body.user_rating);
       expect(data.attributes.trainer_rating).to.equal(req.body.trainer_rating);
 
       done();
     };
 
-    req.params = {
-      id: 1
-    };
-
     req.body = {
+      id: 1,
       user_rating: 2,
       trainer_rating: 2
     };
@@ -75,7 +72,7 @@ describe('Rating model tests', () => {
       done();
     };
 
-    req.params = {
+    req.body = {
       id: 1
     };
 
@@ -93,7 +90,7 @@ describe('Rating model tests', () => {
       done();
     };
 
-    req.params = {
+    req.body = {
       id: 1
     };
 
