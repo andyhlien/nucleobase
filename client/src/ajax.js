@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
 module.exports.post = (endpoint, options, callback) => {
-    $.ajax({
+  $.ajax({
     type: 'POST',
     url: endpoint,
     data: options,
@@ -17,7 +17,7 @@ module.exports.post = (endpoint, options, callback) => {
 };
 
 module.exports.delete = (endpoint, options, callback) => {
-    $.ajax({
+  $.ajax({
     type: 'DELETE',
     url: endpoint,
     data: options,
@@ -33,7 +33,7 @@ module.exports.delete = (endpoint, options, callback) => {
 };
 
 module.exports.put = (endpoint, options, callback) => {
-    $.ajax({
+  $.ajax({
     type: 'PUT',
     url: endpoint,
     data: options,
@@ -49,7 +49,7 @@ module.exports.put = (endpoint, options, callback) => {
 };
 
 module.exports.get = (endpoint, options, callback) => {
-    $.ajax({
+  $.ajax({
     type: 'GET',
     url: endpoint,
     data: options,
