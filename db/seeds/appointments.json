@@ -1,26 +1,35 @@
 [ 
   {
     "appointment": {
-        "time": "6:00AM",
-        "date": "09/24/2017",
-        "price": 50,
-        "location": "in Hackreactor"
+      "location":  "San Francisco, CA",
+      "date": "Sat Sep 23 2017 00:00:00 GMT-0700 (PDT)",
+      "price":  "60",
+      "time": {
+        "from": "Thu Sep 07 2017 13:30:39 GMT-0700 (PDT)", 
+        "to": "Thu Sep 07 2017 14:30:44 GMT-0700 (PDT)"
+      }
     }
   },
-  {
+    {
     "appointment": {
-        "time": "8:00pM",
-        "date": "09/18/2017",
-        "price": 100,
-        "location": "SF down town"
+      "location":  "San Francisco, CA",
+      "date": "Sat Sep 23 2017 00:00:00 GMT-0700 (PDT)",
+      "price":  "60",
+      "time": {
+        "from": "Thu Sep 07 2017 13:30:39 GMT-0700 (PDT)", 
+        "to": "Thu Sep 07 2017 14:30:44 GMT-0700 (PDT)"
+      }
     }
   },
-  {
+    {
     "appointment": {
-        "time": "10:00pM",
-        "date": "tomorow",
-        "price": 99,
-        "location": "GPS coordinate..."
+      "location":  "San Francisco, CA",
+      "date": "Sat Sep 23 2017 00:00:00 GMT-0700 (PDT)",
+      "price":  "60",
+      "time": {
+        "from": "Thu Sep 07 2017 13:30:39 GMT-0700 (PDT)", 
+        "to": "Thu Sep 07 2017 14:30:44 GMT-0700 (PDT)"
+      }
     }
   }
 ]
