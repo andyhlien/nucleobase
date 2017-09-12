@@ -54,7 +54,7 @@ module.exports.update = (req, res) => {
 };
 
 module.exports.get = (req, res) => {
-  models.Review.where(req.body)
+  models.Review.where(req.query)
   .fetchAll()
   .then(reviews => {
     res.status(200).send(reviews);

@@ -54,7 +54,7 @@ module.exports.update = (req, res) => {
 };
 
 module.exports.get = (req, res) => {
-  models.Payment.where(req.body)
+  models.Payment.where(req.query)
   .fetchAll()
   .then(payments => {
     res.status(200).send(payments);

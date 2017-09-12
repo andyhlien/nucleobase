@@ -54,7 +54,7 @@ module.exports.update = (req, res) => {
 };
 
 module.exports.get = (req, res) => {
-  models.Appointment.where(req.body)
+  models.Appointment.where(req.query)
   .fetchAll()
   .then(appointments => {
     res.status(200).send(appointments);

@@ -54,7 +54,7 @@ module.exports.update = (req, res) => {
 };
 
 module.exports.get = (req, res) => {
-  models.BankAccount.where(req.body)
+  models.BankAccount.where(req.query)
   .fetchAll()
   .then(bankAccounts => {
     res.status(200).send(bankAccounts);

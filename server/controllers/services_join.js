@@ -54,7 +54,7 @@ module.exports.update = (req, res) => {
 };
 
 module.exports.get = (req, res) => {
-  models.ServiceJoin.where(req.body)
+  models.ServiceJoin.where(req.query)
   .fetchAll()
   .then(servicesJoin => {
     res.status(200).send(servicesJoin);

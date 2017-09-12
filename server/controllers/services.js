@@ -55,7 +55,7 @@ module.exports.update = (req, res) => {
 };
 
 module.exports.get = (req, res) => {
-  models.Service.where(req.body)
+  models.Service.where(req.query)
   .fetchAll()
   .then(services => {
     res.status(200).send(services);

@@ -54,7 +54,7 @@ module.exports.update = (req, res) => {
 };
 
 module.exports.get = (req, res) => {
-  models.UserTrainerJoin.where(req.body)
+  models.UserTrainerJoin.where(req.query)
   .fetchAll()
   .then(userTrainerJoin => {
     res.status(200).send(userTrainerJoin);
