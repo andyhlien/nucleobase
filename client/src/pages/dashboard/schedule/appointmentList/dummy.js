@@ -1,4 +1,4 @@
-var appointments = [
+const appointments = [
   {
     location:  'San Francisco, CA',
     date: 'Sat Sep 23 2017 00:00:00 GMT-0700 (PDT)',
