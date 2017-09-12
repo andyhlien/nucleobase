@@ -1,8 +1,6 @@
-import React from 'react';
-
 import { parseDateFull } from './../../../../helpers/parseDate';
 import { parseTime } from './../../../../helpers/parseTime';
-
+import React from 'react';
 
 class Preview extends React.Component {
   constructor(props) {
@@ -10,12 +8,7 @@ class Preview extends React.Component {
   }
 
   render() {
-
-    const { date, to, location, price } = this.props.appointment;
-    const From = this.props.appointment.from;
-
     return (
-
       <div className="col-lg-8 col-sm-8" style={{
         height: '100%',
         display: 'flex',
@@ -25,7 +18,6 @@ class Preview extends React.Component {
         backgroundColor: '#BEBAB9',
         padding: '0'
       }}>
-
         <div style={{
           display: 'flex',
           flexDirection: 'column',
@@ -33,13 +25,25 @@ class Preview extends React.Component {
           paddingTop: '15px'
         }}>
           {
-            date === undefined ? 
-              'Select an appointment' :
-              <span style={{fontSize: '20px'}}>{`Date: ${parseDateFull(date)}`}</span>
+            this.props.appointment.date ? 
+              <span style={{fontSize: '20px'}}>{`Date: ${parseDateFull(this.props.appointment.date)}`}</span> :
+              'Select an appointment'
           }
-          <span style={{color: 'gray'}}>{`From: ${From === undefined ? '--' : parseTime(From)} To: ${to === undefined ? '--' : parseTime(to)}`}</span>
+          <span style={{color: 'gray'}}>
+            {
+              `From: ${
+                this.props.appointment.time.from ? 
+                  parseTime(this.props.appointment.time.from) :
+                  '--'
+              }
+              To: ${
+                this.props.appointment.time.to ?
+                parseTime(this.props.appointment.time.to) :
+                '--'
+              }`
+            }
+          </span>
         </div>
-
         <div style={{
           height: '200px',
           display: 'flex', 
@@ -48,19 +52,15 @@ class Preview extends React.Component {
           padding: '30px 0 30px 0'
         }}>
           {
-            this.props.appointment.date === undefined ?
-              <img src='https://d30y9cdsu7xlg0.cloudfront.net/png/658625-200.png' style={{height: '100%'}}/> :
-              <img src='https://lh3.googleusercontent.com/-_G3XieI-P7Y/AAAAAAAAAAI/AAAAAAAAAEY/AU_AGutjoWQ/s640/photo.jpg' style={{height: '100%'}}/>
+            this.props.appointment.date ?
+              <img src='https://lh3.googleusercontent.com/-_G3XieI-P7Y/AAAAAAAAAAI/AAAAAAAAAEY/AU_AGutjoWQ/s640/photo.jpg' style={{height: '100%'}}/> :
+              <img src='https://d30y9cdsu7xlg0.cloudfront.net/png/658625-200.png' style={{height: '100%'}}/> 
           }
         </div>
         <span style={{paddingBottom: '15px'}}>Rating:</span>
-
         <span>another thing!?!?</span>
-
       </div>
-
     );
-
   }
 }
 
