@@ -15,7 +15,7 @@ class Schedule extends React.Component {
   componentWillMount() {
     AJAX.get('/session', {}, (session) => {
       this.setState({session: session}, () => {
-        AJAX.get('/appointments', {id: this.state.session.id}, (appointments) => {
+        AJAX.get('/appointments', {sender: this.state.session.id}, (appointments) => {
           this.setState({appointments: appointments});
         });
       });
@@ -24,10 +24,9 @@ class Schedule extends React.Component {
 
   addAppointment(appointment) {
     appointment.sender = this.state.session.id;
-    appointment.receiver = 1;
 
     AJAX.post('/appointments', appointment, () => {
-      AJAX.get('/appointments', {id: this.state.session.id}, (appointments) => {
+      AJAX.get('/appointments', {sender: this.state.session.id}, (appointments) => {
         this.setState({appointments: appointments});
       });
     });
