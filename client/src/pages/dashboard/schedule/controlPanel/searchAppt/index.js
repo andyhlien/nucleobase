@@ -1,7 +1,5 @@
-import React from 'react';
-
 import TextField from 'material-ui/TextField';
-
+import React from 'react';
 
 class SearchAppointment extends React.Component {
   constructor(props) {
@@ -9,7 +7,6 @@ class SearchAppointment extends React.Component {
     this.state = {
       apptSearch: ''
     };
-    this.searchUpdate = this.searchUpdate.bind(this);
   }
 
   searchUpdate(event) {
@@ -19,17 +16,13 @@ class SearchAppointment extends React.Component {
   }
 
   render() {
-
     return (
-
       <TextField 
         hintText="Search appointments..."
         value={this.state.apptSearch}
-        onChange={this.searchUpdate}
+        onChange={this.searchUpdate.bind(this)}
       />
-
     );
-
   }
 }
 

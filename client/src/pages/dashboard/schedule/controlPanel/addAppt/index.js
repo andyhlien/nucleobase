@@ -1,12 +1,11 @@
-import React from 'react';
-
-import Dialog from 'material-ui/Dialog';
-import TimePicker from 'material-ui/TimePicker';
-import DatePicker from 'material-ui/DatePicker';
 import RaisedButton from 'material-ui/RaisedButton';
+import DatePicker from 'material-ui/DatePicker';
 import FlatButton from 'material-ui/FlatButton';
+import TimePicker from 'material-ui/TimePicker';
 import TextField from 'material-ui/TextField';
 import Divider from 'material-ui/Divider';
+import Dialog from 'material-ui/Dialog';
+import React from 'react';
 
 class AddAppointment extends React.Component {
   constructor(props) {
@@ -18,10 +17,6 @@ class AddAppointment extends React.Component {
       addFromTime: '',
       addToTime: ''
     };
-    this.handleAddSubmit = this.handleAddSubmit.bind(this);
-    this.addDateUpdater = this.addDateUpdater.bind(this);
-    this.addFromTimeUpdater = this.addFromTimeUpdater.bind(this);
-    this.addToTimeUpdater = this.addToTimeUpdater.bind(this);
   }
 
   addUpdater(event, option) {
@@ -51,13 +46,21 @@ class AddAppointment extends React.Component {
   }
 
   handleAddSubmit() {
-    const { addLocation, addDate, addPrice, addFromTime, addToTime} = this.state;
-    console.log('submitted! ', 'location: ', addLocation, 'date: ', addDate, 'price: ', addPrice, 'from: ', addFromTime, 'to: ', addToTime);
+    var options = {
+      time: JSON.stringify({
+        from: this.state.addFromTime,
+        to: this.state.addToTime
+      }),
+      date: this.state.addDate,
+      price: this.state.addPrice.substr(1),
+      location: this.state.addLocation
+    };
+    
+    this.props.addAppointment(options);
     this.props.handleToggle({type: 'addOpen'});
   }
 
   render() {
-
     const addActions = [
       <FlatButton 
         label="Cancel"
@@ -65,12 +68,11 @@ class AddAppointment extends React.Component {
       />,
       <RaisedButton
         label="Create Appointment"
-        onClick={this.handleAddSubmit}
+        onClick={this.handleAddSubmit.bind(this)}
       />
     ];
 
     return (
-
       <Dialog
         actions={addActions}
         modal={false}
@@ -90,7 +92,6 @@ class AddAppointment extends React.Component {
           flexDirection: 'column',
           justifyContent: 'center',
         }}>
-
           <span style={{height: '30px'}}>Choose Appointment Date:</span>
           <div style={{
             width: '100%',
@@ -102,11 +103,10 @@ class AddAppointment extends React.Component {
             <DatePicker 
               hintText="Date"
               value={this.state.addDate}
-              onChange={this.addDateUpdater}
+              onChange={this.addDateUpdater.bind(this)}
             />
           </div>
           <span style={{height: '30px'}}></span>
-
           <span style={{height: '30px'}}>Choose Appointment Times:</span>
           <div style={{
             width: '100%',
@@ -118,18 +118,16 @@ class AddAppointment extends React.Component {
             <TimePicker
               textFieldStyle={{width: '100px'}}
               hintText="From"
-              onChange={this.addFromTimeUpdater}
+              onChange={this.addFromTimeUpdater.bind(this)}
             />
             <span style={{width: '30px'}}></span>
             <TimePicker
               textFieldStyle={{width: '100px'}}
               hintText="To"
-              onChange={this.addToTimeUpdater}
+              onChange={this.addToTimeUpdater.bind(this)}
             />
           </div>
           <span style={{height: '30px'}}></span>
-
-
           <span style={{height: '30px'}}>Choose a Location:</span>
           <div style={{
             width: '100%',
@@ -145,8 +143,6 @@ class AddAppointment extends React.Component {
             />
           </div>
           <span style={{height: '30px'}}></span>
-
-
           <span style={{height: '30px'}}>Set Your Price:</span>
           <div style={{
             width: '100%',
@@ -161,12 +157,9 @@ class AddAppointment extends React.Component {
               onChange={(e) => this.addUpdater(e, {type: 'price'})}
             />
           </div>
-
         </div>
       </Dialog>
-
     );
-
   }
 }
 
