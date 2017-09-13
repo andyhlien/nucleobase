@@ -35,6 +35,7 @@ class ApptList extends React.Component {
             backgroundColor: '#DCD8D7'
           }}>
             <ListComponent
+              filter={this.props.filter}
               appointments={this.props.appointments}
               deleteAppointment={this.props.deleteAppointment}
               previewAppointment={this.previewAppointment.bind(this)}

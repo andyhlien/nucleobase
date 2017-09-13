@@ -16,6 +16,27 @@ class ListComponent extends React.Component {
     super(props);
   }
 
+  filter(appointment) {
+    if (this.props.filter.length) {
+      for (var key in appointment) {
+        if (appointment[key]){
+          for (var i = 0; i !== this.props.filter.length; i++) {
+            if (this.props.filter[i]) {
+              if (typeof appointment[key] === 'string') {
+                if (JSON.stringify(appointment[key]).toUpperCase().includes(this.props.filter[i].toUpperCase())) {
+                  return true;
+                }
+              }
+            }
+          }
+        }
+      }
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   render() {
     const iconButtonElement = (appointment, index) => (
       <IconButton
@@ -44,6 +65,10 @@ class ListComponent extends React.Component {
           </Subheader>
           {
             this.props.appointments.map((appointment, i) => {
+              if (!this.filter(appointment)) {
+                return;
+              }
+
               if (typeof appointment.time === 'string') {
                 appointment.time = JSON.parse(appointment.time);
                 appointment.time.from = (new Date(Date.parse(appointment.time.from))).toString();

@@ -5,22 +5,25 @@ class SearchAppointment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      apptSearch: ''
+      search: ''
     };
   }
 
-  searchUpdate(event) {
+  handleChange(event) {
     this.setState({
-      apptSearch: event.target.value
+      search: event.target.value
     });
+
+    this.props.filterAppointments(event);
   }
 
   render() {
     return (
       <TextField 
         hintText="Search appointments..."
-        value={this.state.apptSearch}
-        onChange={this.searchUpdate.bind(this)}
+        value={this.state.search}
+        onChange={this.handleChange.bind(this)}
+        onKeyPress={this.props.filterAppointments}
       />
     );
   }

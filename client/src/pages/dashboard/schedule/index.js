@@ -8,7 +8,8 @@ class Schedule extends React.Component {
     super(props);
     this.state = {
       session: {},
-      appointments: []
+      appointments: [],
+      filter: []
     };
   }
 
@@ -40,6 +41,23 @@ class Schedule extends React.Component {
     });
   }
 
+  filterAppointments(event) {
+    var words = event.target.value.split(' ');
+    var filter = [];
+
+    for (var i = 0; i !== words.length; i++) {
+      if (words[i]) {
+        filter.push(words[i]);
+      }
+    }
+
+    console.log( filter );
+
+    this.setState({
+      filter: filter
+    });
+  }
+
   render() {
     return (
       <div style={{
@@ -52,6 +70,7 @@ class Schedule extends React.Component {
         }}>
           <ControlPanel
             addAppointment={this.addAppointment.bind(this)}
+            filterAppointments={this.filterAppointments.bind(this)}
           />
         </div>
         <div className="col-lg-9 col-xsm-6" style={{
@@ -62,6 +81,7 @@ class Schedule extends React.Component {
           padding: '0'
         }}>
           <ApptList
+            filter={this.state.filter}
             appointments={this.state.appointments}
             deleteAppointment={this.deleteAppointment.bind(this)}
           />

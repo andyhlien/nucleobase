@@ -28,7 +28,9 @@ class ControlPanel extends React.Component {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-          <SearchAppointment/>
+          <SearchAppointment
+            filterAppointments={this.props.filterAppointments}
+          />
         </div>
         <div className="col-lg-12 col-sm-4" style={{
           height: '100px',
