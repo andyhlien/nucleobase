@@ -92,7 +92,7 @@ describe('Payment model tests', () => {
       done();
     };
 
-    req.body = {
+    req.query = {
       id: 1
     };
 

@@ -87,7 +87,7 @@ describe('Review model tests', () => {
       done();
     };
 
-    req.body = {
+    req.query = {
       id: 1
     };
 
