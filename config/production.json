@@ -1,6 +1,12 @@
 {
   "knex": {
-    "connection": "DATABASE_URL",
+    "connection": {
+      "database": "dftlpt03rrpdht",
+      "host": "ec2-54-225-113-161.compute-1.amazonaws.com",
+      "port": 5432,
+      "user": "xabkbokctjroaa",
+      "password": "09a2a4912a58010804195d730581b01c3d2653b708a663edf33bdd6739d82192"
+    },
     "debug": false,
     "pool": {
       "min": 2,
