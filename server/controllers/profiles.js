@@ -1,7 +1,6 @@
 const models = require('../../db/models');
 
 module.exports.getAll = (req, res) => {
-  console.log('get here ');
   models.Profile.fetchAll()
     .then(profiles => {
       res.status(200).send(profiles);
