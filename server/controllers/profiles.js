@@ -1,7 +1,6 @@
 const models = require('../../db/models');
 
 module.exports.getAll = (req, res) => {
-  console.log('get here ');
   models.Profile.fetchAll()
     .then(profiles => {
       res.status(200).send(profiles);
@@ -87,24 +86,22 @@ module.exports.update = (req, res) => {
   }
 
   models.Profile.where({ id: req.body.id })
-    .fetch()
-    .then(profile => {
-      if (!profile) {
-        throw profile;
-      }
-      console.log('this is profile', profile.attributes);
-      console.log('this is req.body', req.body);
-      return profile.save(req.body, { method: 'update' });
-    })
-    .then(profile => {
-      res.status(201).send(profile);
-    })
-    .error(error => {
-      res.status(500).send(error);
-    })
-    .catch(() => {
-      res.sendStatus(404);
-    });
+  .fetch()
+  .then(profile => {
+    if (!profile) {
+      throw profile;
+    }
+    return profile.save(req.body, { method: 'update' });
+  })
+  .then(profile => {
+    res.status(201).send(profile);
+  })
+  .error(error => {
+    res.status(500).send(error);
+  })
+  .catch(() => {
+    res.sendStatus(404);
+  })
 };
 
 module.exports.deleteOne = (req, res) => {
