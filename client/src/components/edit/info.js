@@ -1,5 +1,4 @@
 import React from 'react';
-import Edit from './edit';
 import AJAX from '../../ajax.js';
 import EmailIcon from 'material-ui/svg-icons/communication/email';
 import PhoneIcon from 'material-ui/svg-icons/communication/phone';
@@ -171,7 +170,6 @@ class Info extends React.Component {
 	};
 
 	render() {
-		// console.log(this.state.session)
 		const action1 = [
       <FlatButton
         label="Submit"
@@ -186,9 +184,6 @@ class Info extends React.Component {
         onClick={this.handleClose2.bind(this)}
       />,
     ];
-		// if(this.state.toggle) {
-		// 	return <Edit handleClick={this.handleClick.bind(this)}/>
-		// } else {
 			return (
 				<div>
 					<div style={style}>
@@ -301,7 +296,6 @@ class Info extends React.Component {
 					</div>
 				</div>
 			)
-		// };
 	};
 };
 

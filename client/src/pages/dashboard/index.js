@@ -5,7 +5,6 @@ import { Route } from 'react-router-dom';
 import Navbar from '../../components/navbar';
 import Search from '../../components/search/search';
 import Profile from '../../components/profiles/profiles';
-import Edit from '../../components/edit/edit';
 import Info from '../../components/edit/info';
 import DashNav from './dashnav';
 
