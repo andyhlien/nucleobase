@@ -1,19 +1,58 @@
 import ListComponent from './list';
 import Preview from './preview';
 import React from 'react';
+import AJAX from '../../../../ajax.js';
 
 class ApptList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      appointment: { time: {} }
+      appointment: {
+        time: {},
+        sender: {
+          id: '',
+          first: '',
+          last: ''
+        },
+        receiver: {
+          id: '',
+          first: '',
+          last: ''
+        },
+        rating: '',
+        location: ''
+      }
     };
   }
 
   previewAppointment(appointment) {
-    this.setState({
-      appointment: appointment
-    });
+    if (!appointment.rating) {
+      appointment.rating = 'Not yet rated';
+    }
+
+    if (typeof appointment.sender === 'number') {
+      AJAX.get('/api/profiles/' + appointment.sender, {}, (sender) => {
+        appointment.sender = sender;
+
+        if (typeof appointment.receiver === 'number') {
+          AJAX.get('/api/profiles/' + appointment.receiver, {}, (receiver) => {
+            appointment.receiver = receiver;
+
+            this.setState({
+              appointment: appointment
+            });
+          });
+        } else {
+          this.setState({
+            appointment: appointment
+          });
+        }
+      });
+    } else {
+      this.setState({
+        appointment: appointment
+      });
+    }
   }
 
   render() {

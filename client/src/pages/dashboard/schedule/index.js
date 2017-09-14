@@ -16,7 +16,17 @@ class Schedule extends React.Component {
   componentWillMount() {
     AJAX.get('/session', {}, (session) => {
       this.setState({session: session}, () => {
-        AJAX.get('/appointments', {sender: this.state.session.id}, (appointments) => {
+        if (this.state.session.type === 'trainer') {
+          var options = {
+            sender: this.state.session.id
+          }
+        } else {
+          var options = {
+            //receiver: this.state.session.id
+          }
+        }
+
+        AJAX.get('/appointments', options, (appointments) => {
           this.setState({appointments: appointments});
         });
       });
@@ -27,7 +37,17 @@ class Schedule extends React.Component {
     appointment.sender = this.state.session.id;
 
     AJAX.post('/appointments', appointment, () => {
-      AJAX.get('/appointments', {sender: this.state.session.id}, (appointments) => {
+      if ( this.state.session.type === 'trainer' ) {
+        var options = {
+          sender: this.state.session.id
+        }
+      } else {
+        var options = {
+          //receiver: this.state.session.id
+        }
+      }
+
+      AJAX.get('/appointments', options, (appointments) => {
         this.setState({appointments: appointments});
       });
     });
@@ -35,7 +55,17 @@ class Schedule extends React.Component {
 
   deleteAppointment(appointment) {
     AJAX.delete('/appointments', {id: appointment.id}, () => {
-      AJAX.get('/appointments', {id: this.state.session.id}, (appointments) => {
+      if ( this.state.session.type === 'trainer' ) {
+        var options = {
+          sender: this.state.session.id
+        }
+      } else {
+        var options = {
+          //receiver: this.state.session.id
+        }
+      }
+
+      AJAX.get('/appointments', options, (appointments) => {
         this.setState({appointments: appointments});
       });
     });
@@ -50,8 +80,6 @@ class Schedule extends React.Component {
         filter.push(words[i]);
       }
     }
-
-    console.log( filter );
 
     this.setState({
       filter: filter
