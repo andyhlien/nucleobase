@@ -22,19 +22,18 @@ class ListComponent extends React.Component {
         if (appointment[key]){
           for (var i = 0; i !== this.props.filter.length; i++) {
             if (this.props.filter[i]) {
-              if (typeof appointment[key] === 'string') {
-                if (JSON.stringify(appointment[key]).toUpperCase().includes(this.props.filter[i].toUpperCase())) {
-                  return true;
-                }
+              if (JSON.stringify(appointment[key]).toUpperCase().includes(this.props.filter[i].toUpperCase())) {
+                return true;
               }
             }
           }
         }
       }
-      return false;
     } else {
       return true;
     }
+
+    return false;
   }
 
   render() {
