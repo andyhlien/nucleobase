@@ -7,8 +7,8 @@ class Trainers extends React.Component {
     super(props);
 
     this.state = {
-      trainers: [this.state.session, this.state.session],
-      trainees: [this.state.session, this.state.session],
+      trainers: [],
+      trainees: [],
       session: {}
     };
   }
