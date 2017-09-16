@@ -69,6 +69,9 @@ module.exports.get = (req, res) => {
           .fetch()
           .then(profile => {
             appointment.attributes.receiver = profile;
+            appointment.attributes.time = JSON.parse(appointment.attributes.time);
+            appointment.attributes.time.to = (new Date(Date.parse(appointment.attributes.time.to))).toString();
+            appointment.attributes.time.from = (new Date(Date.parse(appointment.attributes.time.from))).toString();
 
             resolve();
           })
