@@ -12,11 +12,8 @@ class ControlPanel extends React.Component {
     };
   }
 
-  handleToggle(option) {
-    const toggles = {
-      'addOpen': this.setState({addOpen: !this.state.addOpen})
-    };
-    toggles[option.type];
+  handleToggle() {
+    this.setState({addOpen: !this.state.addOpen});
   }
   
   render() {
@@ -44,7 +41,7 @@ class ControlPanel extends React.Component {
             labelColor="#ffffff"
             labelPosition="before"
             backgroundColor="#4DC1EA"
-            onClick={() => this.handleToggle({type: 'addApp'})}
+            onClick={this.handleToggle.bind(this)}
           />
           <AddAppointment 
             addOpen={this.state.addOpen}
