@@ -12,14 +12,14 @@ class ApptList extends React.Component {
         rating: '',
         time: {},
         sender: {
-          id: '',
           first: '',
-          last: ''
+          last: '',
+          id: ''
         },
         receiver: {
-          id: '',
           first: '',
-          last: ''
+          last: '',
+          id: ''
         }
       }
     };
@@ -35,18 +35,18 @@ class ApptList extends React.Component {
     return (
       <div style={{
         height: '100%',
-        minWidth: '500px',
         display: 'flex',
-        justifyContent: 'center',
+        minWidth: '500px',
         alignItems: 'center',
+        justifyContent: 'center'
       }}>
         <div className="row" style={{
           width: '100%',
-          height: '600px',
+          height: '600px'
         }}>
           <div className="col-lg-4 col-sm-4" style={{
-            height: '100%',
             padding: '0',
+            height: '100%',
             backgroundColor: '#DCD8D7'
           }}>
             <ListComponent
