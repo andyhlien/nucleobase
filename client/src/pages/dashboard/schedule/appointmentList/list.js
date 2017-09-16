@@ -18,7 +18,11 @@ class ListComponent extends React.Component {
       for (var key in appointment) {
         if (appointment[key]){
           for (var i = 0; i !== this.props.filter.length; i++) {
-            if (JSON.stringify(appointment[key]).toUpperCase().includes(this.props.filter[i].toUpperCase())) {
+            if (key === 'sender' || key === 'receiver' ) {
+              if (JSON.stringify(appointment[key].first + appointment[key].last).toUpperCase().includes(this.props.filter[i].toUpperCase())) {
+                return true;
+              }
+            } else if (JSON.stringify(appointment[key]).toUpperCase().includes(this.props.filter[i].toUpperCase())) {
               return true;
             }
           }
