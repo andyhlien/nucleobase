@@ -34,10 +34,11 @@ class Schedule extends React.Component {
   }
 
   addAppointment(appointment) {
+    appointment.time = JSON.stringify(appointment.time);
     appointment.sender = this.state.session.id;
 
     AJAX.post('/appointments', appointment, () => {
-      if ( this.state.session.type === 'trainer' ) {
+      if (this.state.session.type === 'trainer') {
         var options = {
           sender: this.state.session.id
         }
@@ -55,7 +56,7 @@ class Schedule extends React.Component {
 
   deleteAppointment(appointment) {
     AJAX.delete('/appointments', {id: appointment.id}, () => {
-      if ( this.state.session.type === 'trainer' ) {
+      if (this.state.session.type === 'trainer') {
         var options = {
           sender: this.state.session.id
         }
@@ -72,17 +73,14 @@ class Schedule extends React.Component {
   }
 
   filterAppointments(event) {
-    var words = event.target.value.split(' ');
-    var filter = [];
-
-    for (var i = 0; i !== words.length; i++) {
-      if (words[i]) {
-        filter.push(words[i]);
-      }
-    }
-
     this.setState({
-      filter: filter
+      filter: event.target.value.split(' ').reduce((filter, word) => {
+        if (word) {
+          filter.push(word);
+        }
+
+        return filter;
+      }, [])
     });
   }
 
