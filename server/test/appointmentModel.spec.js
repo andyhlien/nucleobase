@@ -4,11 +4,13 @@ const httpMocks = require('node-mocks-http');
 const expect = require('chai').expect;
 
 describe('Appointment model tests', () => {
-  before(done => {
+  before(function(done) {
+    this.timeout(5000);
     dbUtils.rollbackMigrate(done);
   });
 
-  after(done => {
+  after(function(done) {
+    this.timeout(5000);
     dbUtils.rollback(done);
   });
 
@@ -29,7 +31,7 @@ describe('Appointment model tests', () => {
     req.body = {
       sender: 1,
       receiver: 1,
-      time: '18:00',
+      time: JSON.stringify(new Date()),
       date: 'October 10, 2017',
       price: 100,
       location: 'San Francisco',
@@ -54,7 +56,7 @@ describe('Appointment model tests', () => {
 
     req.body = {
       id: 1,
-      time: '06:00',
+      time: JSON.stringify(new Date()),
       location: 'Paris',
     };
 
