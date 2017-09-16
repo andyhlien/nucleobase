@@ -11,150 +11,141 @@ class AddAppointment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      addLocation: '',
-      addDate: {},
-      addPrice: '$',
-      addFromTime: '',
-      addToTime: ''
+      date: {},
+      price: '$',
+      location: '',
+      fromTime: '',
+      toTime: ''
     };
   }
 
-  addUpdater(event, option) {
+  handleChange(option, event, instance) {
     const options = {
-      'location': () => this.setState({addLocation: event.target.value}),
-      'price': () => this.setState({addPrice: event.target.value})
+      'date': () => {this.setState({date: instance})},
+      'price': () => this.setState({price: event.target.value}),
+      'location': () => this.setState({location: event.target.value}),
+      'fromTime': () => {this.setState({fromTime: instance})},
+      'toTime': () => {this.setState({toTime: instance})}
     };
-    options[option.type]();
+    options[option]();
   }
 
-  addDateUpdater(e, date) {
-    this.setState({
-      addDate: date
+  handleSubmit() {
+    this.props.handleToggle();
+    this.props.addAppointment({
+      time: {
+        from: this.state.fromTime,
+        to: this.state.toTime
+      },
+      date: this.state.date,
+      location: this.state.location,
+      price: this.state.price.substr(1)
     });
-  }
-
-  addFromTimeUpdater(e, date) {
-    this.setState({
-      addFromTime: date
-    });
-  }
-
-  addToTimeUpdater(e, date) {
-    this.setState({
-      addToTime: date
-    });
-  }
-
-  handleAddSubmit() {
-    var options = {
-      time: JSON.stringify({
-        from: this.state.addFromTime,
-        to: this.state.addToTime
-      }),
-      date: this.state.addDate,
-      price: this.state.addPrice.substr(1),
-      location: this.state.addLocation
-    };
-    
-    this.props.addAppointment(options);
-    this.props.handleToggle({type: 'addOpen'});
   }
 
   render() {
-    const addActions = [
+    const actions = [
       <FlatButton 
         label="Cancel"
         onClick={() => this.props.handleToggle({type: 'addOpen'})}
       />,
       <RaisedButton
         label="Create Appointment"
-        onClick={this.handleAddSubmit.bind(this)}
+        onClick={this.handleSubmit.bind(this)}
       />
     ];
 
     return (
       <Dialog
-        actions={addActions}
         modal={false}
+        actions={actions}
         open={this.props.addOpen}
         onRequestClose={() => this.props.handleToggle({type: 'addOpen'})}
         contentStyle={{
           height: '400px',
           display: 'flex',
           flexDirection: 'row',
-          justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
+          justifyContent: 'center'
         }}
       >
         <div style={{
           width: '400px',
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'center',
+          justifyContent: 'center'
         }}>
-          <span style={{height: '30px'}}>Choose Appointment Date:</span>
+          <span style={{height: '30px'}}>
+            Choose Appointment Date:
+          </span>
           <div style={{
             width: '100%',
             display: 'flex',
             flexDirection: 'row',
-            justifyContent: 'flex-start',
-            alignContent: 'center'
+            alignContent: 'center',
+            justifyContent: 'flex-start'
           }}>
             <DatePicker 
               hintText="Date"
-              value={this.state.addDate}
-              onChange={this.addDateUpdater.bind(this)}
+              value={this.state.date}
+              onChange={this.handleChange.bind(this, 'date')}
             />
           </div>
           <span style={{height: '30px'}}></span>
-          <span style={{height: '30px'}}>Choose Appointment Times:</span>
+          <span style={{height: '30px'}}>
+            Choose Appointment Times:
+          </span>
           <div style={{
             width: '100%',
             display: 'flex',
             flexDirection: 'row',
-            justifyContent: 'flex-start',
-            alignContent: 'center'
+            alignContent: 'center',
+            justifyContent: 'flex-start'
           }}>
             <TimePicker
-              textFieldStyle={{width: '100px'}}
               hintText="From"
-              onChange={this.addFromTimeUpdater.bind(this)}
+              textFieldStyle={{width: '100px'}}
+              onChange={this.handleChange.bind(this, 'fromTime')}
             />
             <span style={{width: '30px'}}></span>
             <TimePicker
-              textFieldStyle={{width: '100px'}}
               hintText="To"
-              onChange={this.addToTimeUpdater.bind(this)}
+              textFieldStyle={{width: '100px'}}
+              onChange={this.handleChange.bind(this, 'toTime')}
             />
           </div>
           <span style={{height: '30px'}}></span>
-          <span style={{height: '30px'}}>Choose a Location:</span>
+          <span style={{height: '30px'}}>
+            Choose a Location:
+          </span>
           <div style={{
             width: '100%',
             display: 'flex',
             flexDirection: 'row',
-            justifyContent: 'flex-start',
-            alignContent: 'center'
+            alignContent: 'center',
+            justifyContent: 'flex-start'
           }}>
             <TextField 
               hintText="Location..."
-              value={this.state.addLocation}
-              onChange={(e) => this.addUpdater(e, {type: 'location'})}
+              value={this.state.location}
+              onChange={this.handleChange.bind(this, 'location')}
             />
           </div>
           <span style={{height: '30px'}}></span>
-          <span style={{height: '30px'}}>Set Your Price:</span>
+          <span style={{height: '30px'}}>
+            Set Your Price:
+          </span>
           <div style={{
             width: '100%',
             display: 'flex',
             flexDirection: 'row',
-            justifyContent: 'flex-start',
-            alignContent: 'center'
+            alignContent: 'center',
+            justifyContent: 'flex-start'
           }}>
             <TextField
               hintText="price"
-              value={this.state.addPrice}
-              onChange={(e) => this.addUpdater(e, {type: 'price'})}
+              value={this.state.price}
+              onChange={this.handleChange.bind(this, 'price')}
             />
           </div>
         </div>
