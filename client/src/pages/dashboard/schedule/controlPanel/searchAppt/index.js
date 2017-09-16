@@ -20,8 +20,8 @@ class SearchAppointment extends React.Component {
   render() {
     return (
       <TextField 
-        hintText="Search appointments..."
         value={this.state.search}
+        hintText="Search appointments..."
         onChange={this.handleChange.bind(this)}
         onKeyPress={this.props.filterAppointments}
       />
