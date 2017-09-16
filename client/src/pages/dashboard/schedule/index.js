@@ -110,6 +110,7 @@ class Schedule extends React.Component {
         }}>
           <ApptList
             filter={this.state.filter}
+            session={this.state.session}
             appointments={this.state.appointments}
             deleteAppointment={this.deleteAppointment.bind(this)}
           />

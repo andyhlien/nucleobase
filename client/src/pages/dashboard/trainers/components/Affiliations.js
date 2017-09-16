@@ -22,7 +22,10 @@ class Affiliations extends React.Component {
                   key={index}
                   leftAvatar={
                     <Avatar
-                      src='https://lh3.googleusercontent.com/-_G3XieI-P7Y/AAAAAAAAAAI/AAAAAAAAAEY/AU_AGutjoWQ/s640/photo.jpg'
+                      src={
+                        trainers.image_url ||
+                        'https://lh3.googleusercontent.com/-_G3XieI-P7Y/AAAAAAAAAAI/AAAAAAAAAEY/AU_AGutjoWQ/s640/photo.jpg'
+                      }
                     />
                   }
                 >
@@ -43,7 +46,10 @@ class Affiliations extends React.Component {
                   key={index}
                   leftAvatar={
                     <Avatar
-                      src='https://lh3.googleusercontent.com/-_G3XieI-P7Y/AAAAAAAAAAI/AAAAAAAAAEY/AU_AGutjoWQ/s640/photo.jpg'
+                      src={
+                        trainee.image_url ||
+                        'https://lh3.googleusercontent.com/-_G3XieI-P7Y/AAAAAAAAAAI/AAAAAAAAAEY/AU_AGutjoWQ/s640/photo.jpg'
+                      }
                     />
                   }
                 >

@@ -53,7 +53,11 @@ class Preview extends React.Component {
         }}>
           {
             this.props.appointment.date ?
-              <img src='https://lh3.googleusercontent.com/-_G3XieI-P7Y/AAAAAAAAAAI/AAAAAAAAAEY/AU_AGutjoWQ/s640/photo.jpg' style={{height: '100%'}}/> :
+              <img style={{height: '100%'}} src={
+                this.props.session.image_url ||
+                'https://lh3.googleusercontent.com/-_G3XieI-P7Y/AAAAAAAAAAI/AAAAAAAAAEY/AU_AGutjoWQ/s640/photo.jpg'
+              }
+              /> :
               <img src='https://d30y9cdsu7xlg0.cloudfront.net/png/658625-200.png' style={{height: '100%'}}/> 
           }
         </div>

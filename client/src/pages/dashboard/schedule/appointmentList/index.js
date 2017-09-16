@@ -81,6 +81,7 @@ class ApptList extends React.Component {
             />
           </div>
           <Preview
+            session={this.props.session}
             appointment={this.state.appointment}
           />
         </div>
