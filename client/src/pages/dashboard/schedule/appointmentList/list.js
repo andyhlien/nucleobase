@@ -1,6 +1,3 @@
-// something cool we could try to implement is if the appointment is booked, when you hover over it, the hover color would be different
-// if the appointment wasn't booked, the hover color would be like, green, or something conveying the message of available.
-
 import {List, ListItem, makeSelectable} from 'material-ui/List';
 import ClearIcon from 'material-ui/svg-icons/content/clear';
 import IconButton from 'material-ui/IconButton';

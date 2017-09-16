@@ -7,8 +7,8 @@ class Schedule extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      session: {},
       appointments: [],
+      session: {},
       filter: []
     };
   }
@@ -22,7 +22,7 @@ class Schedule extends React.Component {
           }
         } else {
           var options = {
-            //receiver: this.state.session.id
+            receiver: this.state.session.id
           }
         }
 
@@ -43,7 +43,7 @@ class Schedule extends React.Component {
         }
       } else {
         var options = {
-          //receiver: this.state.session.id
+          receiver: this.state.session.id
         }
       }
 
@@ -61,7 +61,7 @@ class Schedule extends React.Component {
         }
       } else {
         var options = {
-          //receiver: this.state.session.id
+          receiver: this.state.session.id
         }
       }
 
@@ -94,7 +94,7 @@ class Schedule extends React.Component {
       }}>
         <div className="col-lg-3 col-xsm-6" style={{
           display: 'flex',
-          flexDirection: 'column',
+          flexDirection: 'column'
         }}>
           <ControlPanel
             addAppointment={this.addAppointment.bind(this)}
@@ -102,11 +102,11 @@ class Schedule extends React.Component {
           />
         </div>
         <div className="col-lg-9 col-xsm-6" style={{
-          height: '600px',
+          padding: '0',
           display: 'flex',
+          height: '600px',
           flexDirection: 'column',
-          justifyContent: 'space-evenly', 
-          padding: '0'
+          justifyContent: 'space-evenly'
         }}>
           <ApptList
             filter={this.state.filter}
@@ -117,11 +117,11 @@ class Schedule extends React.Component {
         </div>
         <div className="row" style={{
           margin: '0',
-          minHeight: '295px',
           width: '100%',
           display: 'flex',
-          justifyContent: 'center',
+          minHeight: '295px',
           alignItems: 'center',
+          justifyContent: 'center',
           backgroundColor: '#111822'
         }}>
           Some content down here

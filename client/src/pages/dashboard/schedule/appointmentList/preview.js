@@ -67,7 +67,7 @@ class Preview extends React.Component {
           {
             this.props.appointment.rating ?
             'Rating: ' + this.props.appointment.rating :
-            '' 
+            'Rating: Not yet rated'
           }
         </span>
         <span>
