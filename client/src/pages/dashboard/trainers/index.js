@@ -5,84 +5,48 @@ import React from 'react';
 class Trainers extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      trainers: [],
       trainees: [],
+      trainers: [],
       session: {}
     };
   }
 
   componentWillMount() {
-
-    var trainees = [];
-    var present = false;
-
     AJAX.get('/session', {}, (session)=>{
-      this.setState({
-        session: session
-      }, () => {
-        
-        // if trainer get a list of all my users => appointmemts table
+      this.setState({session: session}, () => {
         if ( this.state.session.type === 'trainer' ) {
-          
-          // appointments sender = trainer
           AJAX.get('/appointments', {sender: this.state.session.id}, (appointments) => {
-            
-            // for each appointement get profile of the receiver
-            appointments.forEach((appointment, i) => {
-              
+            var trainees = {};
 
+            appointments.forEach((appointment) => {
+              if (appointment.receiver && !trainees[appointment.receiver.id]) {
+                trainees[appointment.receiver.id] = true;
 
-              // Check if trainee not allready in trainees array
-              present = false;
-
-              for (var i = 0; i < this.state.trainees.length; i++){
-                if (appointment.receiver.id === this.state.trainees.id){
-                  present = true;
-                }
-              }
-
-              if (present === false){
                 this.state.trainees.push(appointment.receiver);
-                this.forceUpdate();
               }
+            });
 
-            });  
+            this.setState({trainees: this.state.trainees});  
           });
-
-        // if user get a list of all my trainer  
         } else {
-
-          // appointments receiver = trainee
           AJAX.get('/appointments', {receiver: this.state.session.id}, (appointments) => {
-            
-            // for each appointement get profile of the sender
-            appointments.forEach((appointment, i) => {
-              
+            var trainers = {};
 
-              // Check if trainee not allready in trainees array
-              present = false;
+            appointments.forEach((appointment) => {
+              if (appointment.sender && !trainers[appointment.sender.id]) {
+                trainers[appointment.sender.id] = true;
 
-              for (var i = 0; i < this.state.trainers.length; i++){
-                if (appointment.sender.id === this.state.trainers.id){
-                  present = true;
-                }
+                this.state.trainers.push(appointment.receiver);
               }
 
-              if (present === false){
-                this.state.trainers.push(appointment.sender);
-                this.forceUpdate();
-              }
-
-
-            });  
+              this.setState({trainers: this.state.trainers});
+            });
           });
         }
       });
     });
   }
-
 
   render() {
     return (
