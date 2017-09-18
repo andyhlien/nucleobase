@@ -1,14 +1,11 @@
-const models = require('../../db/models');
 const email = require('../middleware/email');
+const models = require('../../db/models');
 
 module.exports.create = (req, res) => {
-
-  // send email
   if (req.body.receiverEmail !== undefined) {
     email.send(req.body.senderDisplay, req.body.senderEmail, req.body.receiverDisplay, req.body.receiverEmail, 'Trainer Finder', req.body.message);
   }
 
-  // save data 
   models.Message.forge({sender: req.body.sender, receiver: req.body.receiver, message: req.body.message})
   .save()
   .then(message => {
@@ -65,18 +62,30 @@ module.exports.get = (req, res) => {
   models.Message.where(req.query)
   .fetchAll()
   .then(messages => {
-    res.status(200).send(messages);
+    var promises = messages.map(message => {
+      return new Promise((resolve, reject) => {
+        models.Profile.where({id: message.attributes.sender})
+        .fetch()
+        .then(profile => {
+          message.attributes.sender = profile;
+        })
+        .then(profile => {
+          models.Profile.where({id: message.attributes.receiver})
+          .fetch()
+          .then(profile => {
+            message.attributes.receiver = profile;
+
+            resolve();
+          })
+        });
+      });
+    });
+
+    Promise.all(promises).then((profiles) => {
+      res.status(200).send(messages);
+    });
   })
   .catch(error => {
     res.status(503).send(error);
   })
 };
-
-
-
-
-
-
-
-
-
