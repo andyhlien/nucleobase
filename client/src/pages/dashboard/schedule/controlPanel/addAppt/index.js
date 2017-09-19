@@ -55,6 +55,14 @@ class AddAppointment extends React.Component {
       location: this.state.location,
       price: this.state.price
     });
+
+    this.setState({
+      date: {},
+      price: '',
+      location: '',
+      fromTime: '',
+      toTime: ''
+    });
   }
 
   render() {
