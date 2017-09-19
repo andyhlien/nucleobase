@@ -12,7 +12,7 @@ class AddAppointment extends React.Component {
     super(props);
     this.state = {
       date: {},
-      price: '$',
+      price: '',
       location: '',
       fromTime: '',
       toTime: ''
@@ -31,6 +31,20 @@ class AddAppointment extends React.Component {
   }
 
   handleSubmit() {
+    for (var key in this.state) {
+      if (!this.state[key]) {
+        return;
+      } else if (key === 'date') {
+        if (JSON.stringify(this.state[key]) === JSON.stringify({})) {
+          return;
+        }
+      } else if (key === 'price') {
+        if (isNaN(this.state[key])) {
+          return;
+        }
+      }
+    }
+
     this.props.handleToggle();
     this.props.addAppointment({
       time: {
@@ -39,7 +53,7 @@ class AddAppointment extends React.Component {
       },
       date: this.state.date,
       location: this.state.location,
-      price: this.state.price.substr(1)
+      price: this.state.price
     });
   }
 
