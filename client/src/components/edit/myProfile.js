@@ -214,7 +214,6 @@ class MyProfile extends React.Component {
 						</Table>
 					</div>
 				</div>
-				<Message/>
       </div>
 		)
 	}
