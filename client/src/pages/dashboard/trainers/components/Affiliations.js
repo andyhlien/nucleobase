@@ -82,6 +82,7 @@ class Affiliations extends React.Component {
 
     const userElement = (user, index) => (
       <ListItem
+        onClick={() => {this.props.selectUser(user)}}
         key={index}
         leftAvatar={
           <Avatar src={
@@ -137,7 +138,7 @@ class Affiliations extends React.Component {
         }
         </Subheader>
           <div>{
-              this.props.trainees.map((trainee, index) => userElement(trainee, index))
+            this.props.trainees.map((trainee, index) => userElement(trainee, index))
           }
           </div>
       </List>
