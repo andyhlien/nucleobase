@@ -3,6 +3,7 @@ import { parseDateFull } from './../../../../helpers/parseDate';
 import StarHalf from 'material-ui/svg-icons/toggle/star-half';
 import { parseTime } from './../../../../helpers/parseTime';
 import Star from 'material-ui/svg-icons/toggle/star';
+import Avatar from 'material-ui/Avatar';
 import React from 'react';
 
 const css = {
@@ -45,7 +46,8 @@ const css = {
     padding: '30px 0 30px 0'
   },
   image: {
-    height: '100%'
+    height: '100%',
+    width: '50%'
   },
   rating: {
     paddingBottom: '15px'
@@ -62,6 +64,9 @@ const css = {
     fontSize: '20px'
   },
   goals: {
+    fontSize: '20px'
+  },
+  unbooked: {
     fontSize: '20px'
   }
 }
@@ -92,7 +97,7 @@ class Preview extends React.Component {
       user ?
       <div className="col-lg-8 col-sm-8" style={css.user}>
         <span style={css.frame}>{
-          <img style={css.image} src={
+          <Avatar style={css.image} src={
             user.image_url ||
             'https://lh3.googleusercontent.com/-_G3XieI-P7Y/AAAAAAAAAAI/AAAAAAAAAEY/AU_AGutjoWQ/s640/photo.jpg'
           }/>
@@ -126,7 +131,8 @@ class Preview extends React.Component {
         </span>
       </div> :
       <div style={css.frame}>{
-        <b>UNBOOKED APPOINTMENT
+        <b style={css.unbooked}>
+          UNBOOKED APPOINTMENT
         </b>
       }</div>
     );
@@ -160,7 +166,7 @@ class Preview extends React.Component {
           userElement(this.props.appointment.receiver) :
           userElement(this.props.appointment.sender) :
           <div style={css.frame}>{
-            <img src='https://i.pinimg.com/originals/f4/26/eb/f426ebe32b19a9fddeeaf8581784b989.gif' style={css.image}/> 
+            <img src='https://saltandlighttv.org/images/loading_dots.gif' style={css.image}/> 
           }</div>
         }
       </div>
