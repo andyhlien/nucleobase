@@ -5,111 +5,164 @@ import { parseTime } from './../../../../helpers/parseTime';
 import Star from 'material-ui/svg-icons/toggle/star';
 import React from 'react';
 
+const css = {
+  preview: {
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+    backgroundColor: '#BEBAB9',
+    justifyContent: 'flex-start'
+  },
+  period: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+    padding: '15px 0 15px 0'
+  },
+  date: {
+    fontSize: '20px'
+  },
+  time: {
+    color: 'gray'
+  },
+  location: {
+    color: 'gray'
+  },
+  user: {
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+    backgroundColor: '#BEBAB9',
+    justifyContent: 'flex-start'
+  },
+  frame: {
+    display: 'flex',
+    height: '200px',
+    alignItems: 'center',
+    flexDirection: 'column',
+    padding: '30px 0 30px 0'
+  },
+  image: {
+    height: '100%'
+  },
+  rating: {
+    paddingBottom: '15px'
+  },
+  name: {
+    color: 'gray',
+    fontSize: '20px',
+    padding: '0 0 15px 0'
+  },
+  email: {
+    fontSize: '20px'
+  },
+  phone: {
+    fontSize: '20px'
+  },
+  goals: {
+    fontSize: '20px'
+  }
+}
+
 class Preview extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  renderRating(rating) {
-    for ( var i = 0; i !== Math.floor(this.props.appointment.sender.rating); i++) {
-      rating.push(<Star key={i} style={{
-        color: 'orange'
-      }}/>);
+  renderRating(rating, user) {
+    for (let i = 0; i !== Math.floor(user.rating); i++) {
+      rating.push(<Star key={i} style={{color: '#f44336'}}/>);
     }
 
-    if (Math.ceil(this.props.appointment.sender.rating) === Math.floor(this.props.appointment.sender.rating) + 1) {
-      rating.push(<StarHalf key={.5} style={{
-        color: 'orange'
-      }}/>);
+    if (Math.ceil(user.rating) === rating.length + 1) {
+      rating.push(<StarHalf key={.5} style={{color: '#f44336'}}/>);
     }
 
-    for (var i = rating.length; i !== 5; i++ ) {
-      rating.push(<StarBorder key={i} style={{
-        color: 'orange'
-      }}/>);
+    for (let i = rating.length; i !== 5; i++ ) {
+      rating.push(<StarBorder key={i} style={{color: '#f44336'}}/>);
     }
 
     return rating;
   }
 
   render() {
-    return (
-      <div className="col-lg-8 col-sm-8" style={{
-        padding: '0',
-        height: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'column',
-        backgroundColor: '#BEBAB9',
-        justifyContent: 'flex-start'
-      }}>
-        <div style={{
-          display: 'flex',
-          paddingTop: '15px',
-          alignItems: 'center',
-          flexDirection: 'column'
-        }}>{
-          this.props.appointment.date ?
-          <span style={{fontSize: '20px'}}>
-            {`Date: ${parseDateFull(this.props.appointment.date)}`}
-          </span> :
-          'Select an appointment'
-        }
-          <span style={{color: 'gray'}}>{
-            `From: ${
-              this.props.appointment.time.from ? 
-              parseTime(this.props.appointment.time.from) :
-              '--'
-            } To: ${
-              this.props.appointment.time.to ?
-              parseTime(this.props.appointment.time.to) :
-              '--'
-            }`
-          }
-          </span>
-        </div>
-        <div style={{
-          display: 'flex', 
-          height: '200px',
-          alignItems: 'center',
-          flexDirection: 'column',
-          padding: '30px 0 30px 0'
-        }}>{
-          this.props.appointment.date ?
-          <img style={{height: '100%'}} src={
-            this.props.session.image_url ||
+    const userElement = (user) => (
+      user ?
+      <div className="col-lg-8 col-sm-8" style={css.user}>
+        <span style={css.frame}>{
+          <img style={css.image} src={
+            user.image_url ||
             'https://lh3.googleusercontent.com/-_G3XieI-P7Y/AAAAAAAAAAI/AAAAAAAAAEY/AU_AGutjoWQ/s640/photo.jpg'
-          }/> :
-          <img src='https://d30y9cdsu7xlg0.cloudfront.net/png/658625-200.png' style={{height: '100%'}}/> 
-        }</div>
-        <span style={{
-          paddingBottom: '15px'
-        }}>{
-          this.props.appointment.sender.rating ?
-          this.renderRating([]) :
+          }/>
+        }</span>
+        <span style={css.rating}>{
+          user.rating ?
+          this.renderRating([], user) :
           ''
         }</span>
-        <span>{
-          this.props.appointment.sender.id ?
-          'ID: ' + this.props.appointment.sender.id :
-          ''
-        }</span>
-        <span>{
-          this.props.appointment.sender && this.props.appointment.sender.first && this.props.appointment.sender.last ?
-          'Trainer: ' + this.props.appointment.sender.first + ' ' + this.props.appointment.sender.last :
-          ''
+        <span style={css.name}>{
+          user.type === 'trainer' ?
+          <strong>{user.first + ' ' + user.last}</strong> :
+          <strong>{user.first + ' ' + user.last}</strong>
         }</span>
         <span>
-          {
-          this.props.appointment.receiver && this.props.appointment.receiver.first && this.props.appointment.receiver.last ?
-          'Client: ' + this.props.appointment.receiver.first + ' ' + this.props.appointment.receiver.last :
-          ''
-        }</span>
-        <span>{
-          this.props.appointment.location ?
-          'Location: ' + this.props.appointment.location :
-          ''
-        }</span>
+          <span style={css.email}>{
+            user.email ?
+            <div><b>Email: </b><span>{user.email}</span></div> :
+            ''
+          }</span>
+            <span style={css.phone}>{
+            user.phone ?
+            <div><b>Phone: </b><span>{user.phone}</span></div> :
+            ''
+          }</span>
+          <span style={css.goals}>{
+            user.goals ?
+            <div><b>Goals: </b><span>{user.goals}</span></div> :
+            ''
+          }</span>
+        </span>
+      </div> :
+      <div style={css.frame}>{
+        <b>UNBOOKED APPOINTMENT
+        </b>
+      }</div>
+    );
+
+    return (
+      <div className="col-lg-8 col-sm-8" style={css.preview}>
+        <div style={css.period}>{
+          <b style={css.date}>{
+            this.props.appointment ?
+            `Date: ${parseDateFull(this.props.appointment.date)}` :
+            'Select an appointment'
+          }</b>
+        }
+          <b style={css.time}>{
+            this.props.appointment ?
+            `From: ${
+              parseTime(this.props.appointment.time.from)
+            } To: ${
+              parseTime(this.props.appointment.time.to)
+            }` :
+            ''
+          }</b>
+          <b style={css.location}>{
+            this.props.appointment ?
+            'Location: ' + this.props.appointment.location :
+            ''
+          }</b>
+        </div>{
+          this.props.appointment ?
+          this.props.session.type === 'trainer' ?
+          userElement(this.props.appointment.receiver) :
+          userElement(this.props.appointment.sender) :
+          <div style={css.frame}>{
+            <img src='https://i.pinimg.com/originals/f4/26/eb/f426ebe32b19a9fddeeaf8581784b989.gif' style={css.image}/> 
+          }</div>
+        }
       </div>
     );
   }

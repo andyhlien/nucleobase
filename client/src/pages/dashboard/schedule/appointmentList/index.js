@@ -7,21 +7,7 @@ class ApptList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      appointment: {
-        location: '',
-        rating: '',
-        time: {},
-        sender: {
-          first: '',
-          last: '',
-          id: ''
-        },
-        receiver: {
-          first: '',
-          last: '',
-          id: ''
-        }
-      }
+      appointment: null
     };
   }
 
