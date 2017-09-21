@@ -1,5 +1,5 @@
 import AddCircle from 'material-ui/svg-icons/content/add-circle';
-import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import SearchAppointment from './searchAppt';
 import AddAppointment from './addAppt';
 import React from 'react';
@@ -34,15 +34,19 @@ class ControlPanel extends React.Component {
           height: '100px',
           alignItems: 'center',
           justifyContent: 'center',
-        }}>
-          <RaisedButton
+        }}>{
+          this.props.session.type === 'trainer' ?
+          <FlatButton
             label="Create"
+            hoverColor="#f44336"
             icon={<AddCircle />}
-            labelColor="#ffffff"
             labelPosition="before"
-            backgroundColor="#4DC1EA"
+            style={{color: 'white'}}
+            backgroundColor="#263238"
             onClick={this.handleToggle.bind(this)}
-          />
+          /> :
+          ''
+        }
           <AddAppointment 
             addOpen={this.state.addOpen}
             addAppointment={this.props.addAppointment}
