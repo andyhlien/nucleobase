@@ -95,6 +95,7 @@ class Schedule extends React.Component {
           flexDirection: 'column'
         }}>
           <ControlPanel
+            session={this.state.session}
             addAppointment={this.addAppointment.bind(this)}
             filterAppointments={this.filterAppointments.bind(this)}
           />
@@ -122,7 +123,7 @@ class Schedule extends React.Component {
           justifyContent: 'center',
           backgroundColor: '#111822'
         }}>
-          Some content down here
+          ©ATCG NUCLEOBASE
         </div>
       </div>
     );
