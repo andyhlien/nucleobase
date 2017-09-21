@@ -51,7 +51,11 @@ class ListComponent extends React.Component {
       <div key={'div' + index}>
         <ListItem
           key={'List' + index}
-          hoverColor="#C3D600"
+          hoverColor={
+            appointment.receiver ?
+            "#f44336" :
+            "#263238"
+          }
           style={{padding: '0'}}
           rightIconButton={iconButtonElement(appointment, index)}
           onClick={() => this.props.previewAppointment(appointment)}
