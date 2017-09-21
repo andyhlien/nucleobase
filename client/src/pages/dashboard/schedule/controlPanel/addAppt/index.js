@@ -1,4 +1,5 @@
 import RaisedButton from 'material-ui/RaisedButton';
+import {orange500} from 'material-ui/styles/colors';
 import DatePicker from 'material-ui/DatePicker';
 import FlatButton from 'material-ui/FlatButton';
 import TimePicker from 'material-ui/TimePicker';
@@ -31,18 +32,12 @@ class AddAppointment extends React.Component {
   }
 
   handleSubmit() {
-    for (var key in this.state) {
-      if (!this.state[key]) {
-        return;
-      } else if (key === 'date') {
-        if (JSON.stringify(this.state[key]) === JSON.stringify({})) {
-          return;
-        }
-      } else if (key === 'price') {
-        if (isNaN(this.state[key])) {
-          return;
-        }
-      }
+    if (JSON.stringify(this.state.date) === JSON.stringify({}) ||
+      !this.state.price || isNaN(this.state.price) || !Number.isInteger(Number(this.state.price)) ||
+      !this.state.location ||
+      !this.state.fromTime ||
+      !this.state.toTime) {
+      return;
     }
 
     this.props.handleToggle();
@@ -150,6 +145,7 @@ class AddAppointment extends React.Component {
             <TextField 
               hintText="Location..."
               value={this.state.location}
+              underlineFocusStyle={{borderColor: orange500}}
               onChange={this.handleChange.bind(this, 'location')}
             />
           </div>
@@ -167,6 +163,7 @@ class AddAppointment extends React.Component {
             <TextField
               hintText="price"
               value={this.state.price}
+              underlineFocusStyle={{borderColor: orange500}}
               onChange={this.handleChange.bind(this, 'price')}
             />
           </div>
